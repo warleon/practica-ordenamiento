@@ -1,10 +1,25 @@
 #include <iostream>
-#include <chrono>
 #include <cmath>
-#include "funciones.h"
+#include <chrono>
 
 using namespace std;
 using namespace std::chrono;
+
+int* selection_sort(int* arr, int n){
+	int minimum;
+	int temp;
+	for(int i=0; i<n; ++i){
+		minimum=i;
+		for(int j=i+1; j<n; ++j){
+			if(arr[j] < arr[minimum]) minimum=j;
+		}
+		temp = arr[minimum];
+		arr[minimum] = arr[i];
+		arr[i] = temp;
+	}
+
+	return arr;
+}
 
 duration<double> array_T[6];
 
