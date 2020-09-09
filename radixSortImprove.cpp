@@ -2,9 +2,6 @@
 #include<random>
 #include<time.h>
 
-using namespace std;
-
-
 int myHash(int n,int radix, int pos){
     int m = pow(radix, pos+1);
     int p = pow(radix, pos);

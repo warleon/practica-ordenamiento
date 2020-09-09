@@ -1,40 +1,91 @@
-#ifdef improve
 #include "radixSortImprove.cpp"
-#else
-#include "radixSort.cpp"
-#endif
+#include "funciones.cpp"
 
-#include <iostream>
+#include<iostream>
 #include<random>
 #include<time.h>
+#include<string>
+#include<fstream>
 
-void display(int *array, int size) {
-   for(int i = 0; i<size; i++)
-      cout << array[i] << " ";
-   cout << endl;
+using namespace std;
+
+int* genRandomArray(int size,int base,int exp){
+    int* arr= new int[size];
+    int max= pow(base,exp);
+    srand(time(NULL));
+    for(int i=0;i<size;i++)
+        arr[i]=rand()%max;
+
+    return arr;
 }
 
-bool checkSorting(int input[],int n){
-    for(int i=0;i<n-1;i++)
-        if(input[i]>input[i+1]) return false;
+bool checkSorting(int input[],int n,char comp){
+    if(comp=='<'){
+        for(int i=0;i<n-1;i++)
+            if(input[i]>input[i+1])return false;
+    }
+    else if(comp=='>'){
+        for(int i=0;i<n-1;i++)
+            if(input[i]<input[i+1])return false;
+    }
 
     return true;
 }
 
-int main() {
-    int n, max=10000;
-    cout << "Enter the number of elements: ";cin >> n;
-    int arr[n];
-    srand(time(NULL));
-    for(int i=0;i<n;i++)
-       arr[i]=rand()%max + 1;
+string RadixTime(auto sort, int base, int maxPower){
+    string csvalues="";
+    int size;
+    int *array=nullptr;
+    clock_t start, end;
+    double tiempo;
+    for(int i=0;i<maxPower;i++){
+        size=pow(base,i);
+        array=genRandomArray(size,base,i);
 
-    //   cout << "Data before Sorting:\n";
-    //   display(arr, n);
-    radixSort(arr, n, 5,10);
-    //   cout << "Data after Sorting:\n";
-    //   display(arr, n);
-    
-    cout<<"is the array sorted?: "<< (checkSorting(arr,n)?"Yes":"No")<<"!\n";
+        start=clock();
+            sort(array,size,i,base);
+        end=clock();
+
+        tiempo=double(end-start)/double(CLOCKS_PER_SEC);
+
+        if(checkSorting(array,size,'<'))
+            csvalues+=to_string(tiempo)+",";
+        else
+            csvalues+=",";
+
+        delete[] array;
+    }
+    return csvalues;
+}
+
+string InsertionTime(auto sort, int base, int maxPower){
+    string csvalues="";
+    int size;
+    int *array=nullptr;
+    clock_t start, end;
+    double tiempo;
+    for(int i=0;i<maxPower;i++){
+        size=pow(base,i);
+        array=genRandomArray(size,base,i);
+
+        start=clock();
+            sort(array,size);
+        end=clock();
+
+        tiempo=double(end-start)/double(CLOCKS_PER_SEC);
+
+        if(checkSorting(array,size,'<'))
+            csvalues+=to_string(tiempo)+",";
+        else
+            csvalues+=",";
+
+        delete[] array;
+    }
+    return csvalues;
+}
+
+int main() {
+    cout<<RadixTime(radixSort,10,7)<<"\n";
+    cout<<InsertionTime(insertion_sort,10,5)<<"\n";
     return 0;
 }
