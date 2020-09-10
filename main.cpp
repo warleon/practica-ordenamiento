@@ -59,7 +59,7 @@ string RadixTime(auto sort, int base, int maxPower){
     return csvalues;
 }
 
-string InsertionTime(auto sort, int base, int maxPower){
+string SelectionTime(auto sort, int base, int maxPower){
     string csvalues="";
     int size;
     int *array=nullptr;
@@ -102,7 +102,7 @@ int main(){
 	if(myFile.is_open()){
         myFile<<values(2,21)<<"\n";
         myFile<<"Radix,"<<RadixTime(radixSortImproved,2,21)<<"\n";
-        myFile<<"Insertion,"<<InsertionTime(selectionSort,2,17)<<"\n";
+        myFile<<"Selection,"<<SelectionTime(selectionSort,2,17)<<"\n";
     }
     return 0;
 }
