@@ -1,3 +1,4 @@
-radix:
-	g++ -o radix main.cpp
-
+main:
+	g++ -o main	main.cpp
+clear:
+	rm main

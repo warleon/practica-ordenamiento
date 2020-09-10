@@ -1,17 +1,6 @@
 #include<list>
-#include<cmath>
-
+#include"auxiliar.h"
 using namespace std;
-
-int myHash(int n,int radix, int pos){
-    int m = pow(radix, pos+1);
-    int p = pow(radix, pos);
-
-    int temp = n%m;
-    int index = temp/p;      //find index for pocket array
-
-    return index;
-}
 
 void radixSort(int arr[], int n, int max,int radix) {
    int i, j, count = 0;
