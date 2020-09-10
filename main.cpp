@@ -97,8 +97,12 @@ string values(int base, int maxPower){
 }
 
 int main(){
-    cout<<values(2,15)<<"\n";
-    cout<<RadixTime(radixSortImproved,2,15)<<"\n";
-    cout<<InsertionTime(selectionSort,2,15)<<"\n";
+    ofstream myFile;
+	myFile.open("values.csv",ios::out);
+	if(myFile.is_open()){
+        myFile<<values(2,21)<<"\n";
+        myFile<<"Radix,"<<RadixTime(radixSortImproved,2,21)<<"\n";
+        myFile<<"Insertion,"<<InsertionTime(selectionSort,2,17)<<"\n";
+    }
     return 0;
 }
