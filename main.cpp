@@ -102,7 +102,7 @@ int main(){
 	if(myFile.is_open()){
         myFile<<values(2,21)<<"\n";
         myFile<<"Radix,"<<RadixTime(radixSortImproved,2,21)<<"\n";
-        myFile<<"Selection,"<<SelectionTime(selectionSort,2,17)<<"\n";
+        myFile<<"Selection,"<<SelectionTime(selectionSort,2,21)<<"\n";
     }
     return 0;
 }
